@@ -1,0 +1,23 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+```
+
+# Identifying phenotype-associated subpopulations through LP_SGL 
+
+Forked from [https://github.com/hongmeizhanghm/LP_GSL](https://github.com/hongmeizhanghm/LP_SGL)
+
+## Installation
+
+```{r,eval=FALSE}
+devtools::install_github("Exceret/LP_SGL")
+```
