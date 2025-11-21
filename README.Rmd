@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 
 # Identifying phenotype-associated subpopulations through LP_SGL 
 
-Forked from [https://github.com/hongmeizhanghm/LP_GSL](https://github.com/hongmeizhanghm/LP_SGL)
+Forked from [https://github.com/hongmeizhanghm/LP_GSL](https://github.com/hongmeizhanghm/LP_SGL), made it a package.
 
 ## Installation
 

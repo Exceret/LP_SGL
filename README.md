@@ -1,12 +1,11 @@
-# Identifying phenotype-associated subpopulations through LP_SGL 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-Forked fromm [https://github.com/hongmeizhanghm/LP_GSL](https://github.com/hongmeizhanghm/LP_SGL), 
+# Identifying phenotype-associated subpopulations through LP\_SGL
+
+Forked from
+[https://github.com/hongmeizhanghm/LP\_GSL](https://github.com/hongmeizhanghm/LP_SGL),
+made it a package.
 
 ## Installation
 
-The Seurat package is used for preprocessing scRNA-seq data.  
-Install Seurat using ```install.packages('Seurat')```.  
-The leidenAlg package is used for cell grouping.   
-Install leidenAlg using ```install.packages('leidenAlg')```.  
-The SGL package is used to solve the regression coefficient vector.  
-Install SGL using ```install.packages('SGL')```. 
+    devtools::install_github("Exceret/LP_SGL")
