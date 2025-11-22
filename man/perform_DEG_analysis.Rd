@@ -25,6 +25,8 @@ Should be normalized and log-transformed (e.g., logCPM).}
 
 \item{adjust_method}{Method for p-value adjustment. Options include "BH", "bonferroni",
 "holm", etc. (default: "BH" for Benjamini-Hochberg)}
+
+\item{...}{Additional argumentss, like verbose (default: TRUE)}
 }
 \value{
 A list containing:

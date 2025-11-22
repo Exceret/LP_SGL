@@ -10,6 +10,7 @@
 #' @param pval_threshold Maximum p-value for significance (default: 0.05)
 #' @param adjust_method Method for p-value adjustment. Options include "BH", "bonferroni",
 #' "holm", etc. (default: "BH" for Benjamini-Hochberg)
+#' @param ... Additional argumentss, like verbose (default: TRUE)
 #'
 #' @return A list containing:
 #' \item{all_results}{Complete results from limma's topTable with statistics for all genes}
@@ -80,7 +81,7 @@ perform_DEG_analysis <- function(
             "x" = "phenotype must contain exactly two unique groups"
         ))
     }
-    adjust_method <- MatchArg(
+    adjust_method <- SigBridgeRUtils::MatchArg(
         adjust_method,
         c(
             "BH",
@@ -94,6 +95,11 @@ perform_DEG_analysis <- function(
         )
     )
 
+    if (verbose) {
+        ts_cli$cli_alert_info(cli::col_green(
+            "Performing DEG analysis on bulk RNA-seq data"
+        ))
+    }
     # Load limma functions
     makeContrasts <- getExportedValue("limma", "makeContrasts")
     lmFit <- getExportedValue("limma", "lmFit")
@@ -112,7 +118,7 @@ perform_DEG_analysis <- function(
     )
 
     # Design matrix
-    design <- model.matrix(~ 0 + factor(group))
+    design <- stats::model.matrix(~ 0 + factor(group))
     colnames(design) <- levels(factor(group))
     rownames(design) <- colnames(bulk_matrix)
 
