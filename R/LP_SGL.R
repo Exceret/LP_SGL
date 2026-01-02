@@ -91,7 +91,7 @@ label_cell <- function(
   if (verbose) {
     ts_cli$cli_alert_info("Calculating correlation matrix...")
   }
-  correlation_matrix <- SigBridgeRUtils::cor2(bulk_dataset, sc_exprs)
+  correlation_matrix <- WGCNA::cor(bulk_dataset, sc_exprs)
 
   # Prepare data for SGL
   data <- if (type != "cox") {
