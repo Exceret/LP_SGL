@@ -1,6 +1,6 @@
 Package: LPSGL
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
@@ -17,11 +17,10 @@ Imports:
     data.table,
     igraph,
     leidenAlg,
-    methods,
     purrr,
     rlang,
     SeuratObject,
     SGL,
-    SigBridgeRUtils
+    SigBridgeRUtils (>= 0.2.2)
 Remotes:
     github::WangLabCSU/SigBridgeRUtils
