@@ -37,8 +37,11 @@ label_cell <- function(
   verbose <- dots$verbose %||%
     SigBridgeRUtils::getFuncOption("verbose") %||%
     TRUE
+  assay <- dots$assay %||% "RNA"
 
   type <- SigBridgeRUtils::MatchArg(type, c("linear", "logit", "cox"), NULL)
+
+  set.seed(seed)
 
   if (type != "cox") {
     if (length(phenotype) != ncol(bulk_dataset)) {
@@ -64,11 +67,7 @@ label_cell <- function(
 
   if (length(cluster_membership) != ncol(seurat_obj)) {
     cli::cli_abort(c(
-      "x" = sprintf(
-        "Length of cluster_membership (%d) does not match number of cells (%d)",
-        length(cluster_membership),
-        ncol(seurat_obj)
-      )
+      "x" = "Length of cluster_membership ({length(cluster_membership)}) does not match number of cells ({ncol(sc_data)})"
     ))
   }
   # Find shared genes
@@ -76,7 +75,9 @@ label_cell <- function(
 
   if (length(shared_genes) == 0) {
     cli::cli_abort(c(
-      "x" = "No shared genes found between bulk and single-cell data"
+      "x" = "No shared genes found between bulk and single-cell data",
+      ">" = "Bulk genes: {length(rownames(bulk_dataset))}",
+      ">" = "Single-cell genes: {length(rownames(sc_data))}"
     ))
   }
 
@@ -91,7 +92,12 @@ label_cell <- function(
   if (verbose) {
     ts_cli$cli_alert_info("Calculating correlation matrix...")
   }
-  correlation_matrix <- WGCNA::cor(bulk_dataset, sc_exprs)
+
+  correlation_matrix <- if (rlang::is_installed("WGCNA")) {
+    WGCNA::cor(bulk_dataset, sc_exprs)
+  } else {
+    stats::cor(bulk_dataset, sc_exprs)
+  }
 
   # Prepare data for SGL
   data <- if (type != "cox") {
@@ -103,8 +109,6 @@ label_cell <- function(
       status = phenotype$status
     )
   }
-
-  set.seed(seed)
 
   # Fit SGL model
   if (verbose) {
